@@ -13,7 +13,7 @@ module.exports = function(port) {
 
         var hasRequiredFields = reqBody.message !== undefined;
         if(!hasRequiredFields) {
-            res.sendStatus(400);
+            res.status(400).send({ error: true });
             return;
         }
 
