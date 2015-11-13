@@ -83,5 +83,30 @@ describe('Message Server', function() {
                 expect(response.body).to.have.deep.property('message', request.body.message);
             });
         });
+
+        context('when an invalid request is made', function() {
+            var response;
+            var request = {
+                method: 'POST',
+                json: true,
+                uri: url + '/messages',
+                simple: false,
+                resolveWithFullResponse: true,
+                body: {
+                    invalidMessage: 'Dogs are better'
+                }
+            };
+
+            beforeEach(function makeRequest() {
+                return rp(request)
+                    .then(function(r) {
+                        response = r;
+                    });
+            });
+
+            it('should respond with 400', function() {
+                expect(response.statusCode).to.equal(400);
+            });
+        });
     });
 });
