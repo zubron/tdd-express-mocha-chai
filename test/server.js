@@ -107,6 +107,14 @@ describe('Message Server', function() {
             it('should respond with 400', function() {
                 expect(response.statusCode).to.equal(400);
             });
+
+            it('should respond with an error status', function() {
+                expect(response.body).to.have.property('error');
+            });
+
+            it('should respond with an error status that is true', function() {
+                expect(response.body).to.have.deep.property('error', true);
+            });
         });
     });
 });
