@@ -46,4 +46,30 @@ describe('Message Server', function() {
                 });
         });
     });
+
+    describe('creating a message', function() {
+        context('when a valid message is received', function() {
+            var response;
+            var request = {
+                method: 'POST',
+                json: true,
+                uri: url + '/messages',
+                resolveWithFullResponse: true,
+                body: {
+                    message: 'Cats are cute'
+                }
+            };
+
+            beforeEach(function makeRequest() {
+                return rp(request)
+                    .then(function(r) {
+                        response = r;
+                    });
+            });
+
+            it('should respond with 201', function() {
+                expect(response.statusCode).to.equal(201);
+            });
+        });
+    });
 });
