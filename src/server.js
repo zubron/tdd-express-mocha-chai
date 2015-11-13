@@ -11,7 +11,8 @@ module.exports = function(port) {
     app.post('/messages', function (req, res) {
         var reqBody = JSON.parse(req.body);
 
-        if(reqBody.message === undefined) {
+        var hasRequiredFields = reqBody.message !== undefined;
+        if(!hasRequiredFields) {
             res.sendStatus(400);
             return;
         }
