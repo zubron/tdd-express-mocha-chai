@@ -152,6 +152,10 @@ describe('Message Server', function() {
             it('should respond with 200', function() {
                 expect(response.statusCode).to.equal(200);
             });
+
+            it('should respond with a valid JSON body', function () {
+                expect(response.body).to.be.an('object');
+            });
         });
     });
 });
