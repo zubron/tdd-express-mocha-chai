@@ -74,6 +74,14 @@ describe('Message Server', function() {
             it('should respond with a valid JSON body', function () {
                 expect(response.body).to.be.an('object');
             });
+
+            it('should have a message in the response', function() {
+                expect(response.body).to.have.property('message');
+            });
+
+            it('should respond with the sent message', function() {
+                expect(response.body).to.have.deep.property('message', request.body.message);
+            });
         });
     });
 });
