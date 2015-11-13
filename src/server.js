@@ -10,6 +10,12 @@ module.exports = function(port) {
 
     app.post('/messages', function (req, res) {
         var reqBody = JSON.parse(req.body);
+
+        if(reqBody.message === undefined) {
+            res.sendStatus(400);
+            return;
+        }
+
         var body = {
             message: reqBody.message
         };
