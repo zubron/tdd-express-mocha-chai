@@ -1,10 +1,10 @@
 var express = require('express');
 
-module.exports = function() {
+module.exports = function(port) {
     var app = express();
 
     return new Promise(function(resolve, reject) {
-        var server = app.listen(8000, function() {
+        var server = app.listen(port, function() {
             resolve(server);
         });
     });
