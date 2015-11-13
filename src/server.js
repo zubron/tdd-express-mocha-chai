@@ -4,7 +4,7 @@ module.exports = function(port) {
     var app = express();
 
     app.post('/messages', function (req, res) {
-        res.sendStatus(200);
+        res.sendStatus(201);
     });
 
     return new Promise(function(resolve, reject) {
