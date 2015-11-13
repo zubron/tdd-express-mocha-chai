@@ -131,4 +131,27 @@ describe('Message Server', function() {
             });
         });
     });
+
+    describe('retrieving messages', function() {
+        context('when a valid request is received', function() {
+            var response;
+            var request = {
+                method: 'GET',
+                json: true,
+                uri: url + '/messages',
+                resolveWithFullResponse: true
+            };
+
+            beforeEach(function makeRequest() {
+                return rp(request)
+                    .then(function(r) {
+                        response = r;
+                    });
+            });
+
+            it('should respond with 200', function() {
+                expect(response.statusCode).to.equal(200);
+            });
+        });
+    });
 });
