@@ -70,6 +70,10 @@ describe('Message Server', function() {
             it('should respond with 201', function() {
                 expect(response.statusCode).to.equal(201);
             });
+
+            it('should respond with a valid JSON body', function () {
+                expect(response.body).to.be.an('object');
+            });
         });
     });
 });
