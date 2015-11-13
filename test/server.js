@@ -45,6 +45,20 @@ describe('Message Server', function() {
                     expect(response.statusCode).to.not.equal(404);
                 });
         });
+
+        it('should accept GET requests to /messages', function() {
+            var request = {
+                method: 'GET',
+                json: true,
+                uri: url + '/messages',
+                resolveWithFullResponse: true
+            };
+
+            return rp(request)
+                .then(function(response) {
+                    expect(response.statusCode).to.not.equal(404);
+                });
+        });
     });
 
     describe('creating a message', function() {
