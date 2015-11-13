@@ -24,7 +24,7 @@ module.exports = function(port) {
     });
 
     app.get('/messages', function(req, res) {
-        res.status(200).send({});
+        res.status(200).send({ messages: null });
     });
 
     return new Promise(function(resolve, reject) {
