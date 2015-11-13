@@ -23,6 +23,10 @@ module.exports = function(port) {
         res.status(201).send(body);
     });
 
+    app.get('/messages', function(req, res) {
+        res.sendStatus(204);
+    });
+
     return new Promise(function(resolve, reject) {
         var server = app.listen(port, function() {
             resolve(server);
