@@ -156,6 +156,15 @@ describe('Message Server', function() {
             it('should respond with a valid JSON body', function () {
                 expect(response.body).to.be.an('object');
             });
+
+            it('should respond with messages', function() {
+                expect(response.body).to.have.property('messages');
+            });
+
+            it('should respond with no messages when no messages have been sent', function() {
+                // No messages have been added, return an empty array
+                expect(response.body.messages).to.have.length(0);
+            });
         });
     });
 });
