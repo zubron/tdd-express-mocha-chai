@@ -3,7 +3,7 @@ var bodyParser = require('body-parser');
 
 module.exports = function(port) {
     var app = express();
-    var message;
+    var messages = [];
 
     app.use(bodyParser.text({
         type: 'application/json'
@@ -18,7 +18,7 @@ module.exports = function(port) {
             return;
         }
 
-        message = reqBody.message;
+        messages.push(reqBody.message);
         var body = {
             message: reqBody.message
         };
@@ -27,11 +27,7 @@ module.exports = function(port) {
 
     app.get('/messages', function(req, res) {
         var body = {
-            messages: []
-        }
-
-        if(message) {
-            body.messages.push(message);
+            messages: messages
         }
 
         res.status(200).send(body);
