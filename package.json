@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "scripts": {
     "start": "node index.js",
-    "test": "mocha"
+    "test": "mocha -R nyan"
   },
   "author": "Bridget McErlean",
   "devDependencies": {
