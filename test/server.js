@@ -208,5 +208,65 @@ describe('Message Server', function() {
                 expect(response.messages).to.have.deep.property('[0]', createMessageRequest.body.message);
             });
         });
+
+        context('when more than one message has been posted', function() {
+            var response;
+            var createFirstMessageRequest = {
+                method: 'POST',
+                json: true,
+                uri: url + '/messages',
+                body: {
+                    message: 'Cats are cute'
+                }
+            };
+
+            var createSecondMessageRequest = {
+                method: 'POST',
+                json: true,
+                uri: url + '/messages',
+                body: {
+                    message: 'Kiki is the cutest'
+                }
+            };
+
+            var getMessagesRequest = {
+                method: 'GET',
+                json: true,
+                uri: url + '/messages'
+            };
+
+            var makeCreateRequests = function () {
+                return rp(createFirstMessageRequest)
+                    .then(function() {
+                        return rp(createSecondMessageRequest);
+                    });
+            };
+
+            var makeGetRequest = function () {
+                return rp(getMessagesRequest);
+            };
+
+            beforeEach(function makeRequest() {
+                return makeCreateRequests()
+                    .then(makeGetRequest)
+                    .then(function(r) {
+                        response = r;
+                    });
+            });
+
+            it('should return one message', function() {
+                expect(response.messages).to.have.length(2);
+            });
+
+            it('should return the first created message first', function() {
+                expect(response.messages).to.have.deep
+                    .property('[0]', createFirstMessageRequest.body.message);
+            });
+
+            it('should return the last created message last', function() {
+                expect(response.messages).to.have.deep
+                    .property('[1]', createSecondMessageRequest.body.message);
+            });
+        });
     });
 });
