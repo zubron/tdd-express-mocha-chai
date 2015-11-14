@@ -203,6 +203,10 @@ describe('Message Server', function() {
             it('should return one message', function() {
                 expect(response.messages).to.have.length(1);
             });
+
+            it('should respond with the sent message', function() {
+                expect(response.messages).to.have.deep.property('[0]', createMessageRequest.body.message);
+            });
         });
     });
 });
