@@ -166,5 +166,43 @@ describe('Message Server', function() {
                 expect(response.body.messages).to.have.length(0);
             });
         });
+
+        context('when a message has been posted', function() {
+            var response;
+            var createMessageRequest = {
+                method: 'POST',
+                json: true,
+                uri: url + '/messages',
+                body: {
+                    message: 'Cats are cute'
+                }
+            };
+
+            var getMessagesRequest = {
+                method: 'GET',
+                json: true,
+                uri: url + '/messages'
+            };
+
+            var makeCreateRequest = function () {
+                return rp(createMessageRequest);
+            };
+
+            var makeGetRequest = function () {
+                return rp(getMessagesRequest);
+            };
+
+            beforeEach(function makeRequest() {
+                return makeCreateRequest()
+                    .then(makeGetRequest)
+                    .then(function(r) {
+                        response = r;
+                    });
+            });
+
+            it('should return one message', function() {
+                expect(response.messages).to.have.length(1);
+            });
+        });
     });
 });
