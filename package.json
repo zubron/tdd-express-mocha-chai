@@ -2,6 +2,7 @@
   "name": "simple_twitter",
   "version": "0.0.1",
   "scripts": {
+    "start": "node index.js",
     "test": "mocha"
   },
   "author": "Bridget McErlean",
