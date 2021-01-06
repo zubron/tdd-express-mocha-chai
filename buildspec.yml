@@ -4,8 +4,8 @@ phases:
   build:
     commands:
       - node --version && npm --version
-	  - npm install
-	  - npm test
+      - npm install
+      - npm test
 cache:
   paths:
     - 'node_modules/**/*'
