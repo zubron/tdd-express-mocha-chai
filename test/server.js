@@ -205,7 +205,7 @@ describe('Message Server', function() {
             });
 
             it('should respond with the sent message', function() {
-                expect(response.messages).to.have.deep.property('[0]', createMessageRequest.body.message);
+                expect(response.messages).to.have.deep.property('0', createMessageRequest.body.message);
             });
         });
 
@@ -260,12 +260,12 @@ describe('Message Server', function() {
 
             it('should return the first created message first', function() {
                 expect(response.messages).to.have.deep
-                    .property('[0]', createFirstMessageRequest.body.message);
+                    .property('0', createFirstMessageRequest.body.message);
             });
 
-            it('should return the last created message last', function() {
+            it('should return the created message last', function() {
                 expect(response.messages).to.have.deep
-                    .property('[1]', createSecondMessageRequest.body.message);
+                    .property('1', createSecondMessageRequest.body.message);
             });
         });
     });
