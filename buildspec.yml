@@ -10,7 +10,11 @@ cache:
   paths:
     - 'node_modules/**/*'
 reports:
-  xunit:
+  unit-tests:
     files:
       - xunit.xml
     file-format: JUNITXML
+  coverages:
+    files:
+      - coverage/cobertura-coverage.xml
+    file-format: COBERTURAXML
