@@ -1,18 +1,13 @@
 version: 0.0
 os: linux
-files:
-  - source: /mbackend.tar.gz
-    destination: /tmp/mbackend.tar.gz
-  - source: /scripts
-    destination: /home/ubuntu/codedeploy-scripts
 hooks:
+  ApplicationStop:
+    - location: scripts/stop_server.sh
+      runas: ubuntu
   AfterInstall:
-    - location: /home/ubuntu/codedeploy-scripts/after_install.sh
+    - location: scripts/after_install.sh
       timeout: 60
       runas: ubuntu
   ApplicationStart:
-    - location: /home/ubuntu/codedeploy-scripts/start_server.sh
-      runas: ubuntu
-  ApplicationStop:
-    - location: /home/ubuntu/codedeploy-scripts/stop_server.sh
+    - location: scripts/start_server.sh
       runas: ubuntu
