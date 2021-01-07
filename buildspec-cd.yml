@@ -10,3 +10,4 @@ artifacts:
   files:
     - mbackend.tar.gz
     - scripts/*
+    - appspec.yml
