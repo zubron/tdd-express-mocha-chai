@@ -1,3 +1,3 @@
 #!/bin/bash
 
-pm2 stop mobile-backend
+/usr/bin/pm2 stop mobile-backend

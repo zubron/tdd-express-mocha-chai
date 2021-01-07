@@ -4,7 +4,7 @@ files:
   - source: /mbackend.tar.gz
     destination: /tmp/mbackend_build
 hooks:
-  ApplicationStop:
+  BeforeInstall:
     - location: scripts/stop_server.sh
       runas: ubuntu
   AfterInstall:

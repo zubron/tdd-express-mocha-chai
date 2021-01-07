@@ -1,3 +1,3 @@
 #!/bin/bash
 
-pm2 start mobile-backend
+/usr/bin/pm2 start mobile-backend
