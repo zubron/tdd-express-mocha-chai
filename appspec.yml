@@ -1,5 +1,8 @@
 version: 0.0
 os: linux
+files:
+  - source: /mbackend.tar.gz
+    destination: /tmp/mbackend_build
 hooks:
   ApplicationStop:
     - location: scripts/stop_server.sh
