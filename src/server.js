@@ -1,5 +1,6 @@
 var express = require('express');
 var bodyParser = require('body-parser');
+var version = require('../package.json').version;
 
 module.exports = function(port) {
     var app = express();
@@ -28,6 +29,14 @@ module.exports = function(port) {
     app.get('/messages', function(req, res) {
         var body = {
             messages: messages
+        }
+
+        res.status(200).send(body);
+    });
+    
+    app.get('/version', function(req, res) {
+        var body = {
+        	version: version
         }
 
         res.status(200).send(body);
