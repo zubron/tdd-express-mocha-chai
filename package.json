@@ -1,6 +1,6 @@
 {
   "name": "simple_twitter",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "scripts": {
     "start": "node index.js",
     "test": "nyc --reporter=cobertura mocha --reporter mocha-multi-reporters"
