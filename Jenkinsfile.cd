@@ -1,0 +1,41 @@
+pipeline {
+    agent {
+        label 'fargate-workers'
+    }
+    stages {
+        stage('Build') {
+            steps {
+                sh 'docker build . | tee /tmp/docker.output'
+                script {
+                    // Grep image ID from "Successfully built 6ca788eba7b9"
+                    IMAGE_ID = sh(
+                        script: 'cat /tmp/docker.output | grep "Successfully built" | cut -d" " -f3',
+                        returnStdout: true
+                    ).trim()
+                }
+            }
+        }
+        /* skip Lint to speed up build.
+        stage('Lint') {
+            steps {
+                // rophy: intentionally avoid failing the job, since this is just for demo.
+                sh "docker run --rm ${IMAGE_ID} node jslint.mjs index.js || true"
+            }
+        }
+        */
+
+        // keep unit test since it's important.
+        stage('Unit Test') {
+            steps {
+                // unit test
+                sh "docker run --rm ${IMAGE_ID} npm run test"
+            }
+        }
+        stage('Publish') {
+            steps {
+                sh "docker tag ${IMAGE_ID} 664937968185.dkr.ecr.ap-northeast-1.amazonaws.com/mobile-backend:${BUILD_NUMBER}"
+                sh "docker push 664937968185.dkr.ecr.ap-northeast-1.amazonaws.com/mobile-backend:${BUILD_NUMBER}"
+            }
+        }
+    }
+}
