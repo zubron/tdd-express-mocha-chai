@@ -1,27 +1,20 @@
 pipeline {
-    agent any
-
+    agent {
+        label 'fargate-workers'
+    }
     stages {
         stage('Build') {
-            agent {
-                label 'fargate-workers'
-            }
             steps {
                 echo 'Building..'
+                sh 'docker --version'
             }
         }
         stage('Test') {
-            agent {
-                label 'fargate-workers'
-            }
             steps {
                 echo 'Testing..'
             }
         }
         stage('Deploy') {
-            agent {
-                label 'fargate-workers'
-            }
             steps {
                 echo 'Deploying....'
             }
