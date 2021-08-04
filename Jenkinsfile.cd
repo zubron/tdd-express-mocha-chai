@@ -5,6 +5,9 @@ pipeline {
     stages {
         stage('Build') {
             steps {
+                // Authenticate ECR in advance. If this fails, save the build time.
+                sh 'aws ecr get-login-password --region ap-northeast-1 | docker login --username AWS --password-stdin 664937968185.dkr.ecr.ap-northeast-1.amazonaws.com'
+
                 sh 'docker build . | tee /tmp/docker.output'
                 script {
                     // Grep image ID from "Successfully built 6ca788eba7b9"
