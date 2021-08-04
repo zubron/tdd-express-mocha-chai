@@ -6,18 +6,27 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building..'
-                sh 'docker --version'
+                sh 'docker build . | tee /tmp/docker.output'
+                script {
+                    // Grep image ID from "Successfully built 6ca788eba7b9"
+                    IMAGE_ID = sh(
+                        script: 'cat /tmp/docker.output | grep "Successfully built" | cut -d" " -f3',
+                        returnStdout: true
+                    ).trim()
+                }
             }
         }
         stage('Test') {
             steps {
                 echo 'Testing..'
+                sh "docker run --rm ${IMAGE_ID} npm run test"
             }
         }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying....'
-            }
+    }
+    post {
+        always {
+            // collect and publish test result..'
+            echo 'placeholder for collecting test results.'
         }
     }
 }
